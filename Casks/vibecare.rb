@@ -13,9 +13,8 @@ cask "vibecare" do
   app "VibeCare.app"
   binary "vibecare-server"
 
-  # The app is Developer ID signed but not yet notarized, so clear the
-  # quarantine flag Homebrew applies on download — otherwise Gatekeeper blocks
-  # first launch. (Restore notarization on the release side to drop this.)
+  # App is Developer ID signed but not notarized; clear quarantine so
+  # Gatekeeper allows first launch.
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/VibeCare.app"],
