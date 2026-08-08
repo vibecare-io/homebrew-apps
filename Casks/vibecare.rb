@@ -22,6 +22,18 @@ cask "vibecare" do
                    sudo: false
   end
 
+  caveats <<~EOS
+    If VibeCare was previously installed with the .pkg installer, remove that
+    copy so Homebrew can manage it (your data in ~/.vibecare is preserved):
+
+      launchctl bootout gui/$(id -u)/io.vibecare.server 2>/dev/null || true
+      rm -f ~/Library/LaunchAgents/io.vibecare.server.plist
+      sudo rm -rf /Applications/VibeCare.app /usr/local/bin/vibecare-server
+      sudo pkgutil --forget io.vibecare.app
+
+    then re-run: brew install --cask vibecare
+  EOS
+
   zap trash: [
     "~/Library/Application Support/VibeCare",
     "~/.vibecare",
