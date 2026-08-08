@@ -8,7 +8,7 @@ cask "vibecare" do
   desc "Wellness and routine management app with on-device BFRB detection"
   homepage "https://github.com/vibecare-io/vibecare"
 
-  depends_on macos: ">= :sequoia"
+  depends_on macos: :sequoia
 
   app "VibeCare.app"
   binary "vibecare-server"
