@@ -1,6 +1,6 @@
 cask "vibecare" do
-  version "0.8.10.26"
-  sha256 "c211722031fae17403bb9b11f8402b24e7dfc93488663f95f72034c28ecfc00c"
+  version "0.8.10.26-1"
+  sha256 "96869b3ecc57d8eb31c2ba382e7b7ea3db2d7a7d7965838b383dedf9d45bd734"
 
   url "https://github.com/vibecare-io/vibecare/releases/download/v#{version}/vibecare-v#{version}-macos.tar.gz",
       verified: "github.com/vibecare-io/vibecare/"
@@ -18,10 +18,10 @@ cask "vibecare" do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/VibeCare.app"],
                    sudo: false
-    # Best-effort: restart the backend if its LaunchAgent is already loaded
-    # (from a prior app launch). On a fresh install the agent isn't registered
-    # yet — the app registers it via SMAppService on first launch — so a failure
-    # here must NOT abort the install.
+    # Best-effort: restart the backend only if its LaunchAgent is
+    # already loaded (from a prior app launch). On a fresh install the
+    # agent isn't registered yet (the app registers it via SMAppService
+    # on first launch), so this must NOT abort the install.
     system_command "/bin/launchctl",
                    args: ["kickstart", "-k", "gui/#{Process.uid}/io.vibecare.server"],
                    sudo: false,
