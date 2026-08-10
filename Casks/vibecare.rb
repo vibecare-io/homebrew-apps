@@ -1,6 +1,6 @@
 cask "vibecare" do
-  version "0.8.8.26"
-  sha256 "0d012401048bf964820f7ac7a02860a8561cd86847f02181387077b7f8705026"
+  version "0.8.10.26"
+  sha256 "c211722031fae17403bb9b11f8402b24e7dfc93488663f95f72034c28ecfc00c"
 
   url "https://github.com/vibecare-io/vibecare/releases/download/v#{version}/vibecare-v#{version}-macos.tar.gz",
       verified: "github.com/vibecare-io/vibecare/"
@@ -11,13 +11,15 @@ cask "vibecare" do
   depends_on macos: :sequoia
 
   app "VibeCare.app"
-  binary "vibecare-server"
 
   # App is Developer ID signed but not notarized; clear quarantine so
   # Gatekeeper allows first launch.
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/VibeCare.app"],
+                   sudo: false
+    system_command "/bin/launchctl",
+                   args: ["kickstart", "-k", "gui/#{Process.uid}/io.vibecare.server"],
                    sudo: false
   end
 
