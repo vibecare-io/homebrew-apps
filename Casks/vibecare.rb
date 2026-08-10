@@ -18,9 +18,14 @@ cask "vibecare" do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/VibeCare.app"],
                    sudo: false
+    # Best-effort: restart the backend if its LaunchAgent is already loaded
+    # (from a prior app launch). On a fresh install the agent isn't registered
+    # yet — the app registers it via SMAppService on first launch — so a failure
+    # here must NOT abort the install.
     system_command "/bin/launchctl",
                    args: ["kickstart", "-k", "gui/#{Process.uid}/io.vibecare.server"],
-                   sudo: false
+                   sudo: false,
+                   must_succeed: false
   end
 
   caveats <<~EOS
