@@ -1,6 +1,6 @@
 cask "vibecare" do
-  version "0.8.10.26-2"
-  sha256 "8634b783325e5c5a48614b3949f491c903541dbcbbd7a0927b797f6a1a88bdb0"
+  version "0.8.15.26"
+  sha256 "0a5f75b79cc97f45a53baee50f11ef7b475031e61cb4c6ea61b67d1d9c654eda"
 
   url "https://github.com/vibecare-io/vibecare/releases/download/v#{version}/vibecare-v#{version}-macos.tar.gz",
       verified: "github.com/vibecare-io/vibecare/"
